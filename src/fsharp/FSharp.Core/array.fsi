@@ -480,6 +480,9 @@ namespace Microsoft.FSharp.Collections
         [<CompiledName("GetSubArray")>]
         val sub: array:'T[] -> startIndex:int -> count:int -> 'T[]
 
+        [<CompiledName("GetSubArrayOld")>]
+        val subOld: array:'T[] -> startIndex:int -> count:int -> 'T[]
+
         /// <summary>Sorts the elements of an array, returning a new array. Elements are compared using Operators.compare. </summary>
         ///
         /// <remarks>This is not a stable sort, i.e. the original order of equal elements is not necessarily preserved. 

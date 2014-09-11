@@ -528,6 +528,31 @@ type ArrayModule2() =
         ()
 
     [<Test>]
+    member this.SubOld() =
+        // integer array
+        let resultInt = Array.subOld [|1..8|] 3 3
+        if resultInt <> [|4;5;6|] then Assert.Fail()
+
+        // string array
+        let resultStr = Array.subOld [|"Lists"; "are";  "commonly" ; "list" |] 1 2
+        if resultStr <> [|"are";  "commonly" |] then Assert.Fail()
+
+        // empty array
+        let resultEpt = Array.subOld [| |] 0 0
+        if resultEpt <> [||] then Assert.Fail()
+
+        // null array
+        let nullArr = null:string[]
+        CheckThrowsArgumentNullException (fun () -> Array.subOld nullArr 1 1 |> ignore)
+
+        // bounds
+        CheckThrowsArgumentException (fun () -> Array.subOld resultInt -1 2 |> ignore)
+        CheckThrowsArgumentException (fun () -> Array.subOld resultInt 1 -2 |> ignore)
+        CheckThrowsArgumentException (fun () -> Array.subOld resultInt 1 20 |> ignore)
+
+        ()
+
+    [<Test>]
     member this.Sum() =
         // empty integer array 
         let resultEptInt = Array.sum ([||]:int[]) 

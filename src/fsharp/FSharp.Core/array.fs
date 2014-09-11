@@ -640,6 +640,18 @@ namespace Microsoft.FSharp.Collections
             if startIndex + count > array.Length then invalidArg "count" (SR.GetString(SR.outOfRange))
             Microsoft.FSharp.Primitives.Basics.Array.subUnchecked startIndex count array
 
+        [<CompiledName("GetSubArrayOld")>]
+        let subOld (array:'T[]) (startIndex:int) (count:int) =
+            checkNonNull "array" array
+            if startIndex < 0 then invalidArg "startIndex" (SR.GetString(SR.inputMustBeNonNegative))
+            if count < 0 then invalidArg "count" (SR.GetString(SR.inputMustBeNonNegative))
+            if startIndex + count > array.Length then invalidArg "count" (SR.GetString(SR.outOfRange))
+
+            let res = (Microsoft.FSharp.Primitives.Basics.Array.zeroCreateUnchecked count : 'T[])
+            for i = 0 to count - 1 do
+                res.[i] <- array.[startIndex + i]
+            res
+
         [<CompiledName("Get")>]
         let get (array:_[]) n = 
             array.[n]
