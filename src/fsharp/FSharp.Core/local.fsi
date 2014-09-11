@@ -42,4 +42,6 @@ module internal Array =
 
     val stableSortInPlaceBy: projection:('T -> 'Key) -> array:'T[] -> unit when 'Key : comparison 
 
+    val stableSortInPlaceWith: comparer:('T -> 'T -> int) -> array:'T[] -> unit when 'T : comparison
+
     val stableSortInPlace: array:'T[] -> unit when 'T : comparison 

@@ -1331,6 +1331,14 @@ namespace Microsoft.FSharp.Collections
                 Array.stableSortInPlace array
                 array :> seq<_>)
 
+        [<CompiledName("SortWith")>]
+        let sortWith f source =
+            checkNonNull "source" source
+            mkDelayedSeq (fun () ->
+                let array = source |> toArray
+                Array.stableSortInPlaceWith f array
+                array :> seq<_>)
+
         [<CompiledName("CountBy")>]
         let countBy keyf source =
             checkNonNull "source" source

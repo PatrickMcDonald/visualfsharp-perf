@@ -858,7 +858,30 @@ type SeqModule2() =
         // null Seq
         CheckThrowsArgumentNullException(fun() -> Seq.sortBy funcInt null  |> ignore)
         ()
-        
+
+    [<Test>]
+    member this.SortWith() =
+
+        // integer Seq
+        let intComparer a b = compare (a%3) (b%3)
+        let resultInt = Seq.sortWith intComparer (seq {0..10})
+        let expectedInt = seq [0;3;6;9;1;4;7;10;2;5;8]
+        VerifySeqsEqual expectedInt resultInt
+
+        // string Seq
+        let resultStr = Seq.sortWith compare (seq ["str1";"str3";"str2";"str4"])
+        let expectedStr = seq ["str1";"str2";"str3";"str4"]
+        VerifySeqsEqual expectedStr resultStr
+
+        // empty Seq
+        let resultEpt = Seq.sortWith intComparer Seq.empty
+        VerifySeqsEqual resultEpt Seq.empty
+
+        // null Seq
+        CheckThrowsArgumentNullException(fun() -> Seq.sortWith intComparer null  |> ignore)
+
+        ()
+
     [<Test>]
     member this.Sum() =
     

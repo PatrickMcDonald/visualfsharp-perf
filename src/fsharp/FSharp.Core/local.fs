@@ -587,19 +587,15 @@ module internal Array =
         if len < 2 then () 
         else System.Array.Sort<_>(array, LanguagePrimitives.FastGenericComparerCanBeNull<_>)
 
-    let stableSortWithKeys (array:array<'T>) (keys:array<'Key>)  =
+    let stableSortWithKeysAndComparer (cFast:IComparer<'Key>) (c:IComparer<'Key>) (array:array<'T>) (keys:array<'Key>)  =
         // 'places' is an array or integers storing the permutation performed by the sort
         let places = zeroCreateUnchecked array.Length 
         for i = 0 to array.Length - 1 do 
             places.[i] <- i 
 
-        let cFast = LanguagePrimitives.FastGenericComparerCanBeNull<'Key>
         System.Array.Sort<_,_>(keys, places, cFast) 
         // 'array2' is a copy of the original values
         let array2 = (array.Clone() :?> array<'T>)
-
-        // 'c' is a comparer for the keys
-        let c = LanguagePrimitives.FastGenericComparer<'Key>
 
         // Walk through any chunks where the keys are equal
         let mutable i = 0
@@ -615,6 +611,11 @@ module internal Array =
             if j - i >= 2 then 
                 System.Array.Sort<_,_>(places, array, i, j-i, null) 
             i <- j
+
+    let stableSortWithKeys (array:array<'T>) (keys:array<'Key>) =
+        let cFast = LanguagePrimitives.FastGenericComparerCanBeNull<'Key>
+        let c = LanguagePrimitives.FastGenericComparer<'Key>
+        stableSortWithKeysAndComparer cFast c array keys
 
     let stableSortInPlaceBy (f: 'T -> 'U) (array : array<'T>) =
         let len = array.Length 
@@ -640,3 +641,11 @@ module internal Array =
                 // 'keys' is an array storing the projected keys
                 let keys = (array.Clone() :?> array<'T>)
                 stableSortWithKeys array keys
+
+    let stableSortInPlaceWith (comparer:'T -> 'T -> int) (array : array<'T>) =
+        let len = array.Length
+        if len > 1 then
+            let comparer = OptimizedClosures.FSharpFunc<_,_,_>.Adapt(comparer)
+            let c = { new IComparer<'T> with member this.Compare(x, y) = comparer.Invoke(x, y) }
+            let keys = (array.Clone() :?> array<'T>)
+            stableSortWithKeysAndComparer c c array keys
