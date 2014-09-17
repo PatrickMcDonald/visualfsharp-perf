@@ -329,6 +329,16 @@ namespace Microsoft.FSharp.Collections
         [<CompiledName("SortWith")>]
         let sortWith cmp xs = Microsoft.FSharp.Primitives.Basics.List.sortWith cmp xs
 
+        [<CompiledName("SortWithNew")>]
+        let sortWithNew cmp xs =
+            // Microsoft.FSharp.Primitives.Basics.List.sortWith cmp xs
+            match xs with
+            | [] | [_] -> xs
+            | _ ->
+                let array = List.toArray xs
+                Microsoft.FSharp.Primitives.Basics.Array.stableSortInPlaceWith cmp array
+                List.ofArray array
+
         [<CompiledName("SortBy")>]
         let sortBy f xs =
             match xs with 

@@ -453,6 +453,9 @@ namespace Microsoft.FSharp.Collections
         [<CompiledName("SortWith")>]
         val sortWith: comparer:('T -> 'T -> int) -> list:'T list -> 'T list 
 
+        [<CompiledName("SortWithNew")>]
+        val sortWithNew: comparer:('T -> 'T -> int) -> list:'T list -> 'T list  when 'T : comparison
+
         /// <summary>Sorts the given list using keys given by the given projection. Keys are compared using Operators.compare.</summary>
         ///
         /// <remarks>This is a stable sort, i.e. the original order of equal elements is preserved.</remarks>

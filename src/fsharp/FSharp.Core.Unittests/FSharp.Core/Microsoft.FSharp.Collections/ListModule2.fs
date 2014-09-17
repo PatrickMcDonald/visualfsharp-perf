@@ -461,6 +461,24 @@ type ListModule02() =
         ()
 
     [<Test>]
+    member this.SortWithNew() =
+
+        // integer list
+        let intComparer a b = compare (a%3) (b%3)
+        let resultInt = List.sortWithNew intComparer [0..10]
+        Assert.AreEqual([0;3;6;9;1;4;7;10;2;5;8], resultInt)
+
+        // string list
+        let resultStr = List.sortWithNew compare ["str1";"str3";"str2";"str4"]
+        Assert.AreEqual(["str1";"str2";"str3";"str4"], resultStr)
+
+        // empty list
+        let resultEpt = List.sortWithNew intComparer []
+        Assert.AreEqual([], resultEpt)
+
+        ()
+
+    [<Test>]
     member this.Sum() =
         // empty integer List 
         let resultEptInt = List.sum ([]:int list)         

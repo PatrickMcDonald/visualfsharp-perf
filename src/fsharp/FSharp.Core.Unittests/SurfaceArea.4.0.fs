@@ -287,6 +287,7 @@ Microsoft.FSharp.Collections.ListModule: Microsoft.FSharp.Collections.FSharpList
 Microsoft.FSharp.Collections.ListModule: Microsoft.FSharp.Collections.FSharpList`1[T] Replicate[T](Int32, T)
 Microsoft.FSharp.Collections.ListModule: Microsoft.FSharp.Collections.FSharpList`1[T] Reverse[T](Microsoft.FSharp.Collections.FSharpList`1[T])
 Microsoft.FSharp.Collections.ListModule: Microsoft.FSharp.Collections.FSharpList`1[T] SortBy[T,TKey](Microsoft.FSharp.Core.FSharpFunc`2[T,TKey], Microsoft.FSharp.Collections.FSharpList`1[T])
+Microsoft.FSharp.Collections.ListModule: Microsoft.FSharp.Collections.FSharpList`1[T] SortWithNew[T](Microsoft.FSharp.Core.FSharpFunc`2[T,Microsoft.FSharp.Core.FSharpFunc`2[T,System.Int32]], Microsoft.FSharp.Collections.FSharpList`1[T])
 Microsoft.FSharp.Collections.ListModule: Microsoft.FSharp.Collections.FSharpList`1[T] SortWith[T](Microsoft.FSharp.Core.FSharpFunc`2[T,Microsoft.FSharp.Core.FSharpFunc`2[T,System.Int32]], Microsoft.FSharp.Collections.FSharpList`1[T])
 Microsoft.FSharp.Collections.ListModule: Microsoft.FSharp.Collections.FSharpList`1[T] Sort[T](Microsoft.FSharp.Collections.FSharpList`1[T])
 Microsoft.FSharp.Collections.ListModule: Microsoft.FSharp.Collections.FSharpList`1[T] Tail[T](Microsoft.FSharp.Collections.FSharpList`1[T])
