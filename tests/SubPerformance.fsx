@@ -29,7 +29,7 @@ let big = {
     Test = test 0 50000 1000
 }
 
-let midSize = 32
+let midSize = 64
 
 let mid = {
     Name = "midArray"

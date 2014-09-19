@@ -643,7 +643,7 @@ module internal Array =
 
     let inline subUnchecked startIndex count (array : 'T[]) =
         let res = zeroCreateUnchecked count : 'T[]
-        if count < 32 then
+        if count < 64 then
             for i = 0 to count - 1 do
                 res.[i] <- array.[startIndex+i]
         else
