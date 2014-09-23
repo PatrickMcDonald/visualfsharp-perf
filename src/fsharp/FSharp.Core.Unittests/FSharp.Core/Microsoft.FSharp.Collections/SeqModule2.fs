@@ -1032,6 +1032,26 @@ type SeqModule2() =
         ()
         
     [<Test>]
+    member this.ToListOld() =
+        // integer Seq
+        let resultInt = Seq.toListOld (seq [1;2;4;5;7])
+        let expectedInt = [1;2;4;5;7]
+        Assert.AreEqual(expectedInt,resultInt)
+
+        // string Seq
+        let resultStr =Seq.toListOld (seq ["str1";"str2";"str3"])
+        let expectedStr =  ["str1";"str2";"str3"]
+        Assert.AreEqual(expectedStr,resultStr)
+
+        // empty Seq
+        let resultEpt = Seq.toListOld Seq.empty
+        Assert.AreEqual([],resultEpt)
+
+        // null Seq
+        CheckThrowsArgumentNullException(fun() -> Seq.toListOld null |> ignore)
+        ()
+
+    [<Test>]
     member this.Truncate() =
         // integer Seq
         let resultInt = Seq.truncate 3 (seq [1;2;4;5;7])

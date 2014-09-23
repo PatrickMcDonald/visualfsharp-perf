@@ -862,6 +862,9 @@ namespace Microsoft.FSharp.Collections
         [<CompiledName("ToList")>]
         val toList: source:seq<'T> -> 'T list
 
+        [<CompiledName("ToListOld")>]
+        val toListOld: source:seq<'T> -> 'T list
+
         /// <summary>Returns the first element for which the given function returns <c>true</c>.
         /// Return <c>None</c> if no such element exists.</summary>
         ///

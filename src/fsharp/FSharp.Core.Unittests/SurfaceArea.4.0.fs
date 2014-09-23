@@ -361,6 +361,7 @@ Microsoft.FSharp.Collections.SeqModule: Int32 CompareWith[T](Microsoft.FSharp.Co
 Microsoft.FSharp.Collections.SeqModule: Int32 FindIndex[T](Microsoft.FSharp.Core.FSharpFunc`2[T,System.Boolean], System.Collections.Generic.IEnumerable`1[T])
 Microsoft.FSharp.Collections.SeqModule: Int32 GetHashCode()
 Microsoft.FSharp.Collections.SeqModule: Int32 Length[T](System.Collections.Generic.IEnumerable`1[T])
+Microsoft.FSharp.Collections.SeqModule: Microsoft.FSharp.Collections.FSharpList`1[T] ToListOld[T](System.Collections.Generic.IEnumerable`1[T])
 Microsoft.FSharp.Collections.SeqModule: Microsoft.FSharp.Collections.FSharpList`1[T] ToList[T](System.Collections.Generic.IEnumerable`1[T])
 Microsoft.FSharp.Collections.SeqModule: Microsoft.FSharp.Core.FSharpOption`1[System.Int32] TryFindIndex[T](Microsoft.FSharp.Core.FSharpFunc`2[T,System.Boolean], System.Collections.Generic.IEnumerable`1[T])
 

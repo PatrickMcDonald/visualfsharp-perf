@@ -1084,6 +1084,19 @@ namespace Microsoft.FSharp.Collections
         let ofList (source : 'T list) = 
             (source :> seq<'T>)
 
+        [<CompiledName("ToListOld")>]
+        let toListOld (source : seq<'T>) =
+            checkNonNull "source" source
+            match source with
+            | :? ('T list) as res -> res
+            | :? ('T[]) as res -> List.ofArray res
+            | _ ->
+                use e = source.GetEnumerator()
+                let mutable res = []
+                while e.MoveNext() do
+                    res <- e.Current :: res
+                List.rev res
+
         [<CompiledName("ToList")>]
         let toList (source : seq<'T>) =
             checkNonNull "source" source
