@@ -1,6 +1,13 @@
+let inline collectTheGarbage() =
+    System.GC.Collect()
+    System.GC.WaitForPendingFinalizers()
+    System.GC.Collect()
+
 let time description f =
+    collectTheGarbage()
     let sw = System.Diagnostics.Stopwatch.StartNew()
     f()
+    collectTheGarbage()
     sw.Stop()
     printfn "%s took %O" description sw.Elapsed
 
@@ -16,8 +23,12 @@ let timeSeqToListOld iterations s =
     for i = 1 to iterations do
         Seq.toListOld s |> ignore
 
-timeSeqToList 1
-timeSeqToListOld 1
+timeSeqToList 1 s
+timeSeqToListOld 1 s
+timeSeqToList 1 l
+timeSeqToListOld 1 l
+timeSeqToList 1 a
+timeSeqToListOld 1 a
 
 //#time "on"
 
