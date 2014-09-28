@@ -484,6 +484,9 @@ namespace Microsoft.FSharp.Collections
         [<CompiledName("IterateIndexed")>]
         val iteri: action:(int -> 'T -> unit) -> source:seq<'T> -> unit
 
+        [<CompiledName("IterateIndexedOld")>]
+        val iteriOld: action:(int -> 'T -> unit) -> source:seq<'T> -> unit
+
         /// <summary>Applies the given function to two collections simultaneously. If one sequence is shorter than 
         /// the other then the remaining elements of the longer sequence are ignored.</summary>
         ///

@@ -248,6 +248,36 @@ type SeqModule2() =
         ()
         
     [<Test>]
+    member this.IteriOld() =
+
+        // seq int
+        let seqint =  seq [ 1..10]
+        let cacheint = ref 0
+
+        let funcint x y = cacheint := !cacheint + x+y
+        Seq.iteriOld funcint seqint
+        Assert.AreEqual(100,!cacheint)
+
+        // seq str
+        let seqStr = seq ["first";"second"]
+        let cachestr =ref 0
+        let funcstr (x:int) (y:string) = cachestr := !cachestr+ x + y.Length
+        Seq.iteriOld funcstr seqStr
+
+        Assert.AreEqual(12,!cachestr)
+
+         // empty seq
+        let emptyseq = Seq.empty
+        let resultEpt = ref 0
+        Seq.iteriOld funcint emptyseq
+        Assert.AreEqual(0,!resultEpt)
+
+        // null seq
+        let nullseq:seq<'a> =  null
+        CheckThrowsArgumentNullException (fun () -> Seq.iteriOld funcint nullseq |> ignore)
+        ()
+
+    [<Test>]
     member this.Length() =
 
          // integer seq  

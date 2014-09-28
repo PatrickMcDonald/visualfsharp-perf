@@ -875,6 +875,15 @@ namespace Microsoft.FSharp.Collections
                 f.Invoke(i, e.Current);
                 i <- i + 1;
 
+        [<CompiledName("IterateIndexedOld")>]
+        let iteriOld f (source : seq<'T>) = 
+            checkNonNull "source" source
+            use e = source.GetEnumerator()
+            let mutable i = 0 
+            while e.MoveNext() do
+                f i e.Current
+                i <- i + 1;
+
         [<CompiledName("Exists")>]
         let exists f (source : seq<'T>) = 
             checkNonNull "source" source
